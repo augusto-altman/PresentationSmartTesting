@@ -1,0 +1,18 @@
+[http]
+[https]
+[user]
+	name = Augusto Altman Quaranta
+	email = augusto.altman@gmail.com
+[merge]
+        tool = kdiff3
+[mergetool "kdiff3"]
+        path = C:/Program Files/KDiff3/kdiff3.exe
+[diff]
+        tool = kdiff3
+        guitool = kdiff3
+[difftool "kdiff3"]
+        path = C:/Program Files/KDiff3/kdiff3.exe
+
+
+
+

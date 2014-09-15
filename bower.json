@@ -1,0 +1,7 @@
+{
+  "name": "presentation-javascript-testing-with-jasmine-20",
+  "version": "0.0.0",
+  "dependencies": {
+    "prism": "gh-pages"
+  }
+}
