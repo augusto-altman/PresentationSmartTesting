@@ -29,17 +29,89 @@ html
           img(src='images/jasmine.svg', class='avatar avatar--big')
 
       section(class='normalSlide')
-        h2 Good things
-        ul
-          li Spy and function mocks
-          li Custom matchers
-          li Clean syntax
-          li Doesn’t rely on any other framework
-          li Easy handle of async calls
+        h2 Clean syntax
+        pre
+          code.language-javascript.
+            describe("A suite", function() {
+              it("contains spec with an expectation", function() {
+                expect(true).toBe(true);
+              });
+            });
+
+      section(class='normalSlide')
+        h2 Spy and function mocks
+        pre
+          code.language-javascript.
+            //Create mocks of a function
+            spyOn(YCoreSF, 'getStatus').and.callFake(function() {
+              console.log('Mocking a function!');
+            });
+
+            //Monitoring a function
+            spyOn(this.component, 'check');
+            this.component.verifyPassword();
+            expect(this.component.check).toHaveBeenCalled();
+
+      section(class='normalSlide')
+        h2 Custom matchers
+        h3 A matcher is a compare function
+        pre(class='code--small')
+          code.language-javascript.
+            //To define a custom matcher
+            var customMatchers = {
+              toBeGoofy: function(util, customEqualityTesters) {
+                return {
+                  compare: function(actual, expected) {
+                    return {
+                      pass: //Custom matcher result
+                      message: //Custom matcher message
+                    };
+                  }
+                };
+              }
+            };
+
+            //To load a custom matcher
+            jasmine.addMatchers(customMatchers);
+
+      section(class='normalSlide')
+        h2 Easy testing of async assertions
+        pre
+          code.language-javascript.
+            it("should do something", function(done) {
+              testTarget(function(data) {
+                expect(data).toEqual("javascript!");
+                done();
+              });
+            });
 
       section(class='normalSlide')
         h2 Test project setup
-        h3 Example: <a href="http://twitter.com/LeaVerou">jsfiddle</a>
+        h3 Spec runner
+        pre(class='code--small')
+          code.language-markup.
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;link rel="shortcut icon" type="image/png" href="lib/jasmine-2.0.3/jasmine_favicon.png"&gt;
+              &lt;link rel="stylesheet" type="text/css" href="lib/jasmine-2.0.3/jasmine.css"&gt;
+
+              &lt;script type="text/javascript" src="lib/jasmine-2.0.3/jasmine.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript" src="lib/jasmine-2.0.3/jasmine-html.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript" src="lib/jasmine-2.0.3/boot.js"&gt;&lt;/script&gt;
+
+              &lt;!-- include source files here... --&gt;
+
+              &lt;!-- include spec files here... --&gt;
+            &lt;/head&gt;
+
+            &lt;body&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+
+      section(class='normalSlide')
+        h2 Test project setup
+        h3 Example on jsfidle
+        <iframe width="100%" height="300" src="http://jsfiddle.net/augustoaltman/2g6062cd/1/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
       section(class='normalSlide')
         h1(class='highlight') But...
