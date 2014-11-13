@@ -126,7 +126,8 @@ html
           li Run the tests in multiple browsers
           li Calculate test coverage
           li Generate reports
-          li and much more...
+          li
+            h3(class='highlight') and much more...
 
       section(class='gif gif--lazy')
         h1 Too much work
@@ -136,11 +137,42 @@ html
           img(src='images/karma.png', class='avatar avatar--big')
 
       section(class='normalSlide')
-        h2 Karma slides
+        h2 Installation
+        pre
+          code.language-javascript.
+            # Install Karma command line globally:
+            $ npm install -g karma-cli
+
+            # Install Karma locally to your project:
+            $ npm install karma --save-dev
+
+            # Install plugins that your project needs:
+            $ npm install karma-jasmine karma-chrome-launcher --save-dev
+
+      section(class='normalSlide')
+        h2 Configuration and usage
+        pre
+          code.language-javascript.
+            # Start the configuration wizard
+            $ karma init my.conf.js
+
+            # Start Karma using your configuration:
+            $ karma start my.conf.js
+
+      section(class='normalSlide')
+        h2 Karma plugins
         ul
-          li bla
-          li bla
-          li bla...
+          li karma-jasmine
+          li karma-requirejs
+          li karma-chrome-launcher
+          li karma-firefox-launcher
+          li karma-ie-launcher
+          li karma-phantomjs-launcher
+          li karma-safari-launcher
+          li karma-html-reporter
+          li karma-coverage
+          li
+            h3(class='highlight') and much more...
 
       section(class='normalSlide')
         h2 
@@ -164,10 +196,64 @@ html
           img(src='images/gruntText.png', class='avatar avatar--big')
 
       section(class='normalSlide')
-        h2 Grunt is a task runner for Javascript
+        h2 Installation
         pre
           code.language-javascript.
-            npm install -g grunt-cli
+            # Install Grunt command line globally:
+            $ npm install -g grunt-cli
+
+            # Install Grunt locally to your project:
+            $ npm install grunt --save-dev
+
+            # Install plugins that your project needs:
+            npm install grunt-contrib-concat --save-dev
+
+      section(class='normalSlide')
+        h2 Configuration
+        h3 Gruntfile.js
+        pre(class='code--small')
+          code.language-javascript.
+            module.exports = function(grunt) {
+              // Project configuration.
+              grunt.initConfig({
+                taskA: {}, //taskA configuration
+                taskB: {}  //taskB configuration
+              });
+
+              // Load the plugins that provides the taskA and taskB tasks
+              grunt.loadNpmTasks('grunt-contrib-taskA');
+              grunt.loadNpmTasks('grunt-contrib-taskB');
+
+              // Defining task(s) aliases.
+              grunt.registerTask('someSetOfTasks', ['taskA', 'taskB']);
+
+              // Default task(s).
+              grunt.registerTask('default', ['someSetOfTasks']);
+            };
+
+      section(class='normalSlide')
+        h2 Usage
+        pre
+          code.language-javascript.
+            # Run the taskA:
+            $ grunt taskA
+
+            # Run the someSetOfTasks:
+            $ grunt someSetOfTasks
+
+            # Run the default task:
+            $ grunt
+
+      section(class='normalSlide')
+        h2 Grunt plugins
+        ul
+          li grunt-contrib-concat
+          li grunt-contrib-copy
+          li grunt-contrib-uglify
+          li grunt-contrib-jshint
+          li grunt-contrib-jasmine
+          li
+            h3(class='highlight') and much more...
 
       section(class='normalSlide')
         h2 
