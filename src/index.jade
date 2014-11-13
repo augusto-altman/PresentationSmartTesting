@@ -21,6 +21,29 @@ html
           img(src='images/karma.png', class='avatar avatar--small')
           img(src='images/grunt.png', class='avatar avatar--small')
 
+      section(class='normalSlide')
+        h2 About us
+        pre(class='code--small')
+          code.language-javascript.
+            var authors = {
+              tito: {
+                name: 'Augusto Altman Quaranta',
+                worksAt: {
+                    corp: 'Intel Corporation',
+                    site: 'ASDC',
+                    project: 'TrueKey'
+                }
+              }
+              javi: {
+                name: 'Javier Glatstein',
+                worksAt: {
+                    corp: 'Intel Corporation',
+                    site: 'ASDC',
+                    project: 'TrueKey'
+                }
+              }
+            } 
+
       section(class='gif gif--testing')
         h1 Testing Javascript
 
@@ -224,7 +247,7 @@ html
               grunt.loadNpmTasks('grunt-contrib-taskA');
               grunt.loadNpmTasks('grunt-contrib-taskB');
 
-              // Defining task(s) aliases.
+              // Defining task(s) as task's list.
               grunt.registerTask('someSetOfTasks', ['taskA', 'taskB']);
 
               // Default task(s).
@@ -268,41 +291,152 @@ html
       section(class='titleSlide')
         h2 Karma's Grunt plugin
 
-      section
-        h2 Setting up a Jasmine test project
-        h3 JsFiddle: <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a>
+      section(class='normalSlide')
+        h2 Installation
         pre
           code.language-javascript.
-            bespoke.from('article', [
-              classes(),
-              keys(),
-              touch(),
-              bullets('li, .bullet')
-            ]);
+            # Install the Karma's Grunt plugin
+            $ npm install grunt-karma --save-dev
 
-      section(data-bespoke-state='emphatic')
-        h2 Emphatic Slide!
-        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-state">bespoke-state</a>
+      section(class='normalSlide')
+        h2 Basic task configuration
+        pre(class='code--small')
+          code.language-javascript.
+            module.exports = function(grunt) {
+              // Project configuration.
+              grunt.initConfig({
+                karma: { //karma task configuration
+                  someConf: {
+                    configFile: 'karma.conf.js'
+                  },
+                  anotherConf: {
+                    configFile: 'karma2.conf.js'
+                  }
+                }
+              });
 
-      section(data-bespoke-state='emphatic')
-        h2 Emphatic Sliddskajdkjsade!
-        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-state">bespoke-state</a>
+              // Load the karma's plugin
+              grunt.loadNpmTasks('grunt-karma');
+            };
 
-      section(data-bespoke-state='emphatic')
-        h2 Emphatic Skajdkasjdkjsalide!
-        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-state">bespoke-state</a>
+        pre(class='code--small')
+          code.language-javascript.
+            # Run
+            $ grunt karma:someConf
 
-      section
-        h2.bullet Just the beginning...
-        br
-        ul
-          li Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em>
-          li Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em>
-          li Edit JavaScript in <em>'src/scripts/main.js'</em>
-        br
+      section(class='normalSlide')
+        h2 Advanced task configuration
+        h3 Overriding the Karma's config file options
+        pre(class='code--small')
+          code.language-javascript.
+            grunt.initConfig({
+              karma: { //karma task configuration
+                someConf: {
+                  configFile: 'karma.conf.js', 
+                  runnerPort: 9999,
+                  singleRun: true,
+                  browsers: ['PhantomJS'],
+                  logLevel: 'ERROR',
+                  //And more options to override
+                },
+                anotherConf: {
+                  configFile: 'karma2.conf.js'
+                }
+              }
+            });
+
+      section(class='normalSlide')
+        h2 Advanced task configuration
+        h3 Sharing configurations between tasks
+        pre(class='code--small')
+          code.language-javascript.
+            grunt.initConfig({
+              karma: {
+                options: { //Base configuration
+                  configFile: 'karma.conf.js',
+                  runnerPort: 9999,
+                  browsers: ['Chrome', 'Firefox']
+                },
+                someConf: {
+                  singleRun: true,
+                  browsers: ['PhantomJS']
+                },
+                anotherConf: {
+                  reporters: 'dots'
+                }
+              }
+            });
+
+      section(class='normalSlide')
+        h2 Advanced task configuration
+        h3 Creating a karma's configuration directly from the Grunt's config file
+        pre(class='code--small')
+          code.language-javascript.
+            grunt.initConfig({
+              karma: {
+                someConf: {
+                  options: {
+                    files: ['test/**/*.js'],
+                    runnerPort: 9999,
+                    browsers: ['Chrome', 'Firefox']
+                  }
+                },
+                anotherConf: {
+                  configFile: 'karma2.conf.js'
+                }
+              }
+            });
+
+      section(class='normalSlide')
+        h2 Tests in the build process
+        h3 Jasmine over Karma over Grunt
+        pre(class='code--small')
+          code.language-javascript.
+            grunt.initConfig({
+              jshint: {}, //Configurate the jshint task
+              concat: {}, //Configurate the concat task
+              uglify: {}, //Configurate the uglify task
+              karma: {}, //Configurate the karma task
+              copy: {} //Configurate the copy task
+            });
+
+            // Defining the deliver task.
+            grunt.registerTask('deliver', ['jshint', 'concat', 'uglify', 'karma', 'copy']);
+
+      section(class='normalSlide')
         ul
           li
-            strong Enjoy! :)
-            a(href='http://twitter.com/markdalgleish')  -@markdalgleish
+            h1(class='highlight') Smart testing
+          li with  
+            span(class='highlight') one command line
+          li you can execute a 
+            span(class='highlight') complete process
+          li including your 
+            span(class='highlight') tests
+          li that will run over 
+            span(class='highlight') different browsers
+          li 
+            span(class='highlight') generate reports
+          li and more...
+
+      section(class='gif gif--clapping')
+
+      section(class='normalSlide')
+        h2 
+          span(class='highlight') Be smart... always
+        h3 Three things that we want you to take
+        ul
+          li 
+            span(class='highlight') Automate everything you can
+          li There is no need to execute repetitve task manually
+          li 
+            span(class='highlight') Use extensible technology
+          li One never knows what is going to need in the future
+          li 
+            span(class='highlight') Don't forget to test your builds
+          li If you have a build process include the unit tests on it
+
+      section(class='gif gif--thanks')
+
 
     script(src='build/build.js')
